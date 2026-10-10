@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { achievements, certifications, education, experience, profile, projects, skillCategories } from '../data/portfolio';
 import { useScrollLock } from '../hooks/smoothScroll';
+import MandyMascot from './MandyMascot';
 
 type NavigationTarget = 'top' | 'about' | 'journey' | 'originals' | 'picks' | 'skills' | 'moments' | 'story' | 'contact';
 type ChatMessage = { role: 'assistant' | 'user'; text: string };
@@ -34,7 +35,7 @@ const targets: Record<NavigationTarget, string> = {
 
 const initialMessage: ChatMessage = {
   role: 'assistant',
-  text: "Hi, I’m Kartikay’s portfolio guide. Ask about projects, experience, skills, or ask me to take you to a section.",
+  text: "Hi, I’m Mandy! I’m Kartikay’s portfolio friend. Ask me about his work, or tell me where you’d like to go and I’ll take you there.",
 };
 
 function getError(data: unknown, fallback: string): string {
@@ -253,15 +254,12 @@ export default function AssistantHub({
           <header className="px-4 pb-4 pt-4 sm:px-5">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-gradient-to-br from-accent to-[#83c92f] text-ink shadow-[0_5px_24px_rgba(185,255,74,0.2)]" aria-hidden>
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2.8 13.8 9l6.2 3-6.2 2.2L12 21l-2.2-6.8L3 12l6.8-3L12 2.8Z" />
-                    <path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z" />
-                  </svg>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] bg-accent" aria-hidden>
+                  <MandyMascot className="h-11 w-11" />
                 </span>
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">Kartikay · Portfolio guide</p>
-                  <h2 className="mt-1 text-base font-semibold tracking-tight text-bone">{view === 'assistant' ? 'Ask about my work' : 'Review a résumé'}</h2>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">Mandy · Kartikay’s portfolio friend</p>
+                  <h2 className="mt-1 text-base font-semibold tracking-tight text-bone">{view === 'assistant' ? 'What should we explore?' : 'Review a résumé'}</h2>
                 </div>
               </div>
               <button ref={closeButton} type="button" onClick={() => setOpen(false)} aria-label="Close AI panel" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] text-mist transition hover:bg-white/10 hover:text-bone">
@@ -313,14 +311,14 @@ export default function AssistantHub({
                   ))}
                 </div>
                 <form onSubmit={sendMessage} className="flex items-end gap-2">
-                  <label className="sr-only" htmlFor="portfolio-ai-question">Ask the portfolio guide</label>
+                  <label className="sr-only" htmlFor="portfolio-ai-question">Ask Mandy about the portfolio</label>
                   <textarea
                     id="portfolio-ai-question"
                     rows={2}
                     maxLength={1200}
                     value={question}
                     onChange={(event) => setQuestion(event.target.value)}
-                    placeholder="Ask about a project, skill, or role…"
+                    placeholder="Ask Mandy to show you the résumé…"
                     className="min-h-12 min-w-0 flex-1 resize-none rounded-[16px] border border-white/10 bg-white/[0.045] px-4 py-3 text-sm text-bone outline-none placeholder:text-smoke focus:border-accent/50"
                   />
                   <button type="button" onClick={recording ? () => recognition.current?.stop() : startVoiceInput} aria-label={recording ? 'Stop speech input' : 'Start speech input'} className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border text-lg transition ${recording ? 'border-red-400/40 bg-red-400/10 text-red-300' : 'border-white/10 bg-white/[0.045] text-bone hover:bg-white/10'}`}>
@@ -352,19 +350,16 @@ export default function AssistantHub({
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
-        aria-label={open ? 'Close portfolio guide' : 'Ask Kartikay’s portfolio guide'}
+        aria-label={open ? 'Close Mandy' : 'Ask Mandy, the portfolio assistant'}
         tabIndex={open ? -1 : undefined}
         className={`group ml-auto flex min-h-[58px] items-center gap-3 rounded-[20px] border border-white/10 bg-[#111115]/95 py-2 pl-2.5 pr-4 text-left shadow-[0_12px_40px_rgba(0,0,0,0.38)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_14px_44px_rgba(0,0,0,0.48),0_0_28px_rgba(185,255,74,0.08)] ${open ? 'hidden' : ''}`}
       >
         <span className="relative flex h-10 w-10 items-center justify-center rounded-[14px] bg-accent text-ink shadow-[0_4px_20px_rgba(185,255,74,0.2)]" aria-hidden>
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2.8 13.8 9l6.2 3-6.2 2.2L12 21l-2.2-6.8L3 12l6.8-3L12 2.8Z" />
-            <path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z" />
-          </svg>
+          <MandyMascot className="h-10 w-10 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105" />
         </span>
         <span className="flex flex-col">
-          <span className="text-[13px] font-semibold tracking-wide text-bone">{open ? 'Close guide' : 'Ask Kartikay'}</span>
-          <span className="mt-0.5 text-[10px] font-medium tracking-wide text-mist">{open ? 'Portfolio assistant' : 'AI portfolio guide'}</span>
+          <span className="text-[13px] font-semibold tracking-wide text-bone">{open ? 'Close Mandy' : 'Ask Mandy'}</span>
+          <span className="mt-0.5 text-[10px] font-medium tracking-wide text-mist">{open ? 'Kartikay’s portfolio friend' : 'Here to help you explore'}</span>
         </span>
         {!open && <span aria-hidden className="ml-1 text-sm text-smoke transition group-hover:translate-x-0.5 group-hover:text-accent">↗</span>}
       </button>
