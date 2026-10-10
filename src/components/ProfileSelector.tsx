@@ -43,7 +43,7 @@ export default function ProfileSelector({ onPick }: { onPick: (id: ProfileId) =>
       role="dialog"
       aria-label="Choose a portfolio view"
     >
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(185,255,74,0.14),transparent_70%)]" />
+      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,var(--accent-glow),transparent_70%)]" />
       <motion.h2
         className="relative mb-10 text-center font-sans text-3xl font-medium tracking-tight text-bone sm:text-5xl"
         initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}

@@ -9,6 +9,11 @@
   --color-bone: #f4f1ec;
   --color-mist: #a7a6ad;
   --color-smoke: #6d6c75;
+  --accent-glow-soft: rgba(185, 255, 74, 0.08);
+  --accent-glow: rgba(185, 255, 74, 0.18);
+  --accent-glow-strong: rgba(185, 255, 74, 0.38);
+  --accent-outline: rgba(185, 255, 74, 0.6);
+  --accent-cursor: rgba(185, 255, 74, 0.92);
   --font-display: 'Bebas Neue', 'Oswald', Impact, sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -20,11 +25,28 @@
   --gutter: clamp(16px, 4vw, 56px);
 }
 
+.theme-electric {
+  --color-ink: #080704;
+  --color-ink-2: #11100b;
+  --color-ink-3: #1a1811;
+  --color-accent: #f5bd45;
+  --color-accent-2: #ffe09a;
+  --color-bone: #f7f1e4;
+  --color-mist: #b5ad9b;
+  --color-smoke: #79715f;
+  --accent-glow-soft: rgba(245, 189, 69, 0.08);
+  --accent-glow: rgba(245, 189, 69, 0.18);
+  --accent-glow-strong: rgba(245, 189, 69, 0.38);
+  --accent-outline: rgba(245, 189, 69, 0.6);
+  --accent-cursor: rgba(245, 189, 69, 0.92);
+}
+
 html {
   position: relative;
   background: var(--color-ink);
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
+  transition: background-color 300ms ease;
 }
 
 html.lenis,
@@ -47,6 +69,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   text-rendering: optimizeLegibility;
+  transition: background-color 300ms ease, color 300ms ease;
 }
 
 ::selection {
@@ -119,7 +142,7 @@ a:focus-visible {
 .light-streak {
   position: absolute;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(185,255,74, 0.9), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
   filter: blur(0.4px);
   animation: streak 7s var(--ease-cine) infinite;
   opacity: 0;
@@ -135,7 +158,7 @@ a:focus-visible {
   to { background-position: 200% center; }
 }
 .shimmer-text {
-  background: linear-gradient(90deg, #f4f1ec 0%, #f4f1ec 40%, #d2ff79 50%, #f4f1ec 60%, #f4f1ec 100%);
+  background: linear-gradient(90deg, var(--color-bone) 0%, var(--color-bone) 40%, var(--color-accent-2) 50%, var(--color-bone) 60%, var(--color-bone) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;

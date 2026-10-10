@@ -352,9 +352,9 @@ export default function AssistantHub({
         aria-expanded={open}
         aria-label={open ? 'Close Mandy' : 'Ask Mandy, the portfolio assistant'}
         tabIndex={open ? -1 : undefined}
-        className={`group ml-auto flex min-h-[58px] items-center gap-3 rounded-[20px] border border-white/10 bg-[#111115]/95 py-2 pl-2.5 pr-4 text-left shadow-[0_12px_40px_rgba(0,0,0,0.38)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_14px_44px_rgba(0,0,0,0.48),0_0_28px_rgba(185,255,74,0.08)] ${open ? 'hidden' : ''}`}
+        className={`group ml-auto flex min-h-[58px] items-center gap-3 rounded-[20px] border border-white/10 bg-[#111115]/95 py-2 pl-2.5 pr-4 text-left shadow-[0_12px_40px_rgba(0,0,0,0.38)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_14px_44px_rgba(0,0,0,0.48),0_0_28px_var(--accent-glow-soft)] ${open ? 'hidden' : ''}`}
       >
-        <span className="relative flex h-10 w-10 items-center justify-center rounded-[14px] bg-accent text-ink shadow-[0_4px_20px_rgba(185,255,74,0.2)]" aria-hidden>
+        <span className="relative flex h-10 w-10 items-center justify-center rounded-[14px] bg-accent text-ink shadow-[0_4px_20px_var(--accent-glow)]" aria-hidden>
           <MandyMascot className="h-10 w-10 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105" />
         </span>
         <span className="flex flex-col">

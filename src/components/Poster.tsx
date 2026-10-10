@@ -98,7 +98,7 @@ export function SeriesMark({ className = '' }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-1.5 ${className}`}>
       <svg viewBox="0 0 24 32" className="h-[1.1em] w-auto" aria-hidden>
-        <path d="M5 26V6l14 20V6" fill="none" stroke="#b9ff4a" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M5 26V6l14 20V6" fill="none" stroke="var(--color-accent)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span className="font-sans text-[0.62em] font-bold tracking-[0.22em] text-mist">KARTIKAY</span>
     </span>

@@ -72,6 +72,7 @@ React 18 · TypeScript · Vite 6 · Tailwind CSS 4 · Framer Motion · Lenis · 
 
 - Reduced-motion preferences are respected.
 - Motion and custom cursor effects are disabled or reduced where appropriate.
+- The optional electric-gold theme changes colors only, keeps the layout intact, and remembers the preference in the current browser.
 - Keyboard navigation includes the `⌘K` / `Ctrl+K` quick-jump palette, arrow-key selection, and Escape-to-close behavior.
 - Project case studies include horizontally scrollable, numbered architecture flows that remain usable on touch screens.
 - Portraits are served as responsive WebP assets.

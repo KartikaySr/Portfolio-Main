@@ -15,6 +15,17 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
   const [active, setActive] = useState<string>('top');
   const { scrollTo } = useSmoothScroll();
   const menuRef = useRef<HTMLDivElement>(null);
+  const [electricTheme, setElectricTheme] = useState(() => {
+    try {
+      return window.localStorage.getItem('kartikay-color-theme') === 'electric';
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('theme-electric', electricTheme);
+  }, [electricTheme]);
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -53,6 +64,16 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
 
   const current = viewerProfiles.find((p) => p.id === profileId)!;
 
+  const toggleTheme = () => {
+    const next = !electricTheme;
+    setElectricTheme(next);
+    try {
+      window.localStorage.setItem('kartikay-color-theme', next ? 'electric' : 'default');
+    } catch {
+      // Theme still switches for this visit if storage is unavailable.
+    }
+  };
+
   return (
     <motion.header
       className="fixed inset-x-0 top-0 z-[60]"
@@ -60,23 +81,33 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
       transition={{ duration: 0.45, ease: EASE }}
     >
       <div
-        className={`gutter flex h-16 items-center justify-between gap-6 transition-[background,backdrop-filter] duration-500 md:h-[72px] ${
+        className={`gutter flex h-16 items-center gap-3 transition-[background,backdrop-filter] duration-500 md:h-[72px] ${
           solid || mobileNav ? 'bg-ink/80 backdrop-blur-xl' : 'bg-gradient-to-b from-black/80 to-transparent'
         }`}
       >
-        <div className="flex items-center gap-8 lg:gap-10">
-          <button type="button" onClick={() => go('top')} className="text-[22px]" aria-label="Back to top">
-            <SeriesMark />
-          </button>
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Sections">
-            <NavLink label="Home" active={active === 'top'} onClick={() => go('top')} />
-            {order.map((id) => (
-              <NavLink key={id} label={sectionMeta[id].nav} active={active === id} onClick={() => go(id)} />
-            ))}
-          </nav>
-        </div>
+        <button type="button" onClick={() => go('top')} className="shrink-0 text-[22px]" aria-label="Back to top">
+          <SeriesMark />
+        </button>
+        <nav className="hidden min-w-0 flex-1 items-center justify-evenly lg:flex" aria-label="Sections">
+          <NavLink label="Home" active={active === 'top'} onClick={() => go('top')} />
+          {order.map((id) => (
+            <NavLink key={id} label={sectionMeta[id].nav} active={active === id} onClick={() => go(id)} />
+          ))}
+        </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-pressed={electricTheme}
+            aria-label={electricTheme ? 'Switch to the original green theme' : 'Switch to the electric gold theme'}
+            title={electricTheme ? 'Switch to original theme' : 'Switch to electric gold theme'}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-accent transition hover:border-accent-2 hover:text-accent-2"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="m13.2 2.8-8 10.1h6.1l-.7 8.3 8.2-10.6h-6.2l.6-7.8Z" />
+            </svg>
+          </button>
           <button
             type="button"
             onClick={() => go('contact')}
@@ -176,7 +207,7 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
 
 function NavLink({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className={`relative text-[13px] font-medium transition ${active ? 'text-bone' : 'text-mist hover:text-bone'}`}>
+    <button type="button" onClick={onClick} className={`relative shrink-0 whitespace-nowrap text-[13px] font-medium transition ${active ? 'text-bone' : 'text-mist hover:text-bone'}`}>
       {label}
       {active && <motion.span layoutId="nav-underline" className="absolute -bottom-1.5 left-0 right-0 h-[2px] rounded bg-accent" />}
     </button>

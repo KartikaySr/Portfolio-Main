@@ -23,7 +23,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
 
   return (
     <section id="contact" ref={ref} className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 py-24 text-center">
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_60%,rgba(185,255,74,0.14),transparent_70%)]" />
+      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_60%,var(--accent-glow),transparent_70%)]" />
       <Particles count={36} />
 
       <motion.p
@@ -68,7 +68,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
                 rel={c.href.startsWith('http') ? 'noreferrer' : undefined}
                 data-cursor={c.cursor}
                 className={`flex min-h-12 items-center gap-2 rounded-full px-7 text-sm font-bold tracking-[0.12em] transition ${
-                  c.primary ? 'bg-accent text-ink shadow-[0_0_50px_rgba(185,255,74,0.35)] hover:bg-accent-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
+                  c.primary ? 'bg-accent text-ink shadow-[0_0_50px_var(--accent-glow-strong)] hover:bg-accent-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
                 }`}
               >
                 {c.primary && <span>▶</span>}
