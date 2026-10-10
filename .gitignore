@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+*.local
+.claude
+.env*
+!.env.example
+/Portfolio_Main_Zip/
+/sushmita-the-series.zip
