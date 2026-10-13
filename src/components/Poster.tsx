@@ -93,6 +93,64 @@ export function ProjectArt({ project, className = '' }: { project: Project; clas
   );
 }
 
+/** Compact project symbols used in the Engineering Highlights rail. */
+export function ProjectHighlightIcon({ title, color }: { title: string; color: string }) {
+  const common = { fill: 'none', stroke: color, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+
+  return (
+    <svg viewBox="0 0 120 120" className="h-24 w-24 opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-90" aria-hidden>
+      <circle cx="60" cy="60" r="47" stroke={color} strokeOpacity="0.18" strokeWidth="1" />
+      <circle cx="60" cy="60" r="37" stroke={color} strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
+      {title === 'GridForge-AI' && (
+        <g {...common} strokeWidth="2">
+          <path d="M26 72h18l8-25 15 37 9-22h18" />
+          <path d="M31 39h15M38 33v12M86 84h16M94 76v16" strokeOpacity="0.65" />
+          <circle cx="52" cy="47" r="3" fill={color} />
+          <circle cx="67" cy="84" r="3" fill={color} />
+          <circle cx="76" cy="62" r="3" fill={color} />
+        </g>
+      )}
+      {title === 'AetherQ' && (
+        <g {...common} strokeWidth="2">
+          <rect x="31" y="31" width="35" height="45" rx="4" />
+          <path d="M39 42h19M39 50h14M39 58h18" strokeOpacity="0.65" />
+          <circle cx="78" cy="65" r="14" />
+          <path d="m88 75 9 9M66 44l10-8M66 52l12 1" strokeOpacity="0.7" />
+          <circle cx="76" cy="36" r="3" fill={color} />
+        </g>
+      )}
+      {title === 'Nexus' && (
+        <g {...common} strokeWidth="2">
+          <path d="M60 25 91 37v25c0 20-14 30-31 36-17-6-31-16-31-36V37Z" />
+          <path d="M45 61h30M49 51h22M49 71h22" strokeOpacity="0.7" />
+          <circle cx="45" cy="61" r="3" fill={color} />
+          <circle cx="75" cy="61" r="3" fill={color} />
+          <path d="M45 61 38 82M75 61l7 21" strokeOpacity="0.55" />
+        </g>
+      )}
+      {title === 'MindineersOS' && (
+        <g {...common} strokeWidth="2">
+          <circle cx="60" cy="60" r="12" />
+          <circle cx="31" cy="38" r="8" />
+          <circle cx="89" cy="38" r="8" />
+          <circle cx="31" cy="83" r="8" />
+          <circle cx="89" cy="83" r="8" />
+          <path d="m51 52-14-9M69 52l14-9M51 68l-14 9M69 68l14 9" />
+          <path d="M57 60h6M60 57v6" strokeWidth="3" />
+        </g>
+      )}
+      {title === 'CodeAmbers' && (
+        <g {...common} strokeWidth="2">
+          <rect x="27" y="34" width="66" height="48" rx="5" />
+          <path d="M27 47h66M38 60l-8 8 8 8M53 76l9-16M70 60h13M70 68h9" strokeOpacity="0.75" />
+          <circle cx="36" cy="41" r="2" fill={color} stroke="none" />
+          <circle cx="44" cy="41" r="2" fill={color} stroke="none" />
+        </g>
+      )}
+    </svg>
+  );
+}
+
 /** Compact monogram for the portfolio. */
 export function SeriesMark({ className = '' }: { className?: string }) {
   return (

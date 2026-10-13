@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { topPicks } from '../data/portfolio';
 import { EASE, SectionHeading } from './fx';
-import { PosterBackdrop } from './Poster';
+import { PosterBackdrop, ProjectHighlightIcon } from './Poster';
 import { RailButtons } from './Rail';
 
 export default function TopPicks() {
@@ -32,6 +32,11 @@ export default function TopPicks() {
                 <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
                   <PosterBackdrop palette={pick.palette} />
                 </div>
+                {i < 5 && (
+                  <div className="pointer-events-none absolute right-0 top-3 z-[1]">
+                    <ProjectHighlightIcon title={pick.title} color={pick.palette.accent} />
+                  </div>
+                )}
                 <div className="absolute inset-0 flex flex-col justify-between p-3.5">
                   <span className="text-[9px] font-bold uppercase tracking-[0.26em] text-bone/70">{pick.label}</span>
                   <div>

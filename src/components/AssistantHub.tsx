@@ -474,8 +474,11 @@ function ResumeAnalyzer() {
 
       const response = await fetch('/api/analyze-resume', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resumeText, perspective, targetRole, sessionToken }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionToken}`,
+        },
+        body: JSON.stringify({ resumeText, perspective, targetRole }),
       });
       const data = await readResponse(response);
       if (!response.ok) throw new Error(getError(data, 'Résumé analysis failed. Please try again.'));
