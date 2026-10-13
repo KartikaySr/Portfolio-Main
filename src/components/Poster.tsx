@@ -98,7 +98,7 @@ export function ProjectHighlightIcon({ title, color }: { title: string; color: s
   const common = { fill: 'none', stroke: color, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 
   return (
-    <svg viewBox="0 0 120 120" className="h-24 w-24 opacity-60 transition duration-500 group-hover:scale-110 group-hover:opacity-90" aria-hidden>
+    <svg viewBox="0 0 120 120" className="h-[clamp(5.5rem,10vw,7rem)] w-[clamp(5.5rem,10vw,7rem)] opacity-70 transition duration-500 group-hover:scale-110 group-hover:opacity-100" aria-hidden>
       <circle cx="60" cy="60" r="47" stroke={color} strokeOpacity="0.18" strokeWidth="1" />
       <circle cx="60" cy="60" r="37" stroke={color} strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
       {title === 'GridForge-AI' && (
