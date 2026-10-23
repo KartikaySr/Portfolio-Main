@@ -20,6 +20,9 @@ import FinalCTA from './components/FinalCTA';
 import AssistantHub from './components/AssistantHub';
 import CommandPalette from './components/CommandPalette';
 import { EASE } from './components/fx';
+import FlowMode from './components/FlowMode';
+import ThreeDMode from './components/ThreeDMode';
+import ModifiedMode from './components/ModifiedMode';
 
 // Overlays are only needed on demand — split them out of the first load.
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
@@ -40,6 +43,26 @@ function readStoredProfile(): ProfileId | null {
 }
 
 export default function App() {
+  const mode = new URLSearchParams(window.location.search).get('mode');
+  if (mode === 'flow') {
+    return <FlowMode onBack={() => {
+      window.history.replaceState({}, '', window.location.pathname);
+      window.location.reload();
+    }} />;
+  }
+  if (mode === '3d') {
+    return <ThreeDMode onBack={() => {
+      window.history.replaceState({}, '', window.location.pathname);
+      window.location.reload();
+    }} />;
+  }
+  if (mode === 'modified') {
+    return <ModifiedMode onBack={() => {
+      window.history.replaceState({}, '', window.location.pathname);
+      window.location.reload();
+    }} />;
+  }
+
   return (
     <SmoothScrollProvider>
       <Series />
@@ -112,7 +135,21 @@ function Series() {
 
       <AnimatePresence>
         {stage === 'opening' && <OpeningSequence key="opening" onDone={() => setStage('profiles')} />}
-        {stage === 'profiles' && <ProfileSelector key="profiles" onPick={pickProfile} />}
+        {stage === 'profiles' && (
+          <ProfileSelector
+            key="profiles"
+            onPick={pickProfile}
+            onFlow={() => {
+              window.location.assign(`${window.location.pathname}?mode=flow`);
+            }}
+            onThreeD={() => {
+              window.location.assign(`${window.location.pathname}?mode=3d`);
+            }}
+            onModified={() => {
+              window.location.assign(`${window.location.pathname}?mode=modified`);
+            }}
+          />
+        )}
       </AnimatePresence>
 
       {stage === 'home' && (

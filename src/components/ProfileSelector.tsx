@@ -13,7 +13,7 @@ export function ProfileAvatar({ id, size = 'lg' }: { id: ProfileId; size?: 'sm' 
       </span>
     );
   }
-  const glyph = { recruiter: 'H', engineer: '</>', projects: '↗' }[id];
+  const glyph = { recruiter: '∿', engineer: '3D', projects: '✦' }[id];
   return (
     <span
       className={`relative flex items-center justify-center overflow-hidden font-display text-bone ${box}`}
@@ -24,7 +24,7 @@ export function ProfileAvatar({ id, size = 'lg' }: { id: ProfileId; size?: 'sm' 
   );
 }
 
-export default function ProfileSelector({ onPick }: { onPick: (id: ProfileId) => void }) {
+export default function ProfileSelector({ onPick, onFlow, onThreeD, onModified }: { onPick: (id: ProfileId) => void; onFlow: () => void; onThreeD: () => void; onModified: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onPick('portfolio');
@@ -60,15 +60,30 @@ export default function ProfileSelector({ onPick }: { onPick: (id: ProfileId) =>
       >
         {viewerProfiles.map((p) => (
           <motion.li key={p.id} variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } } }}>
-            <button type="button" onClick={() => onPick(p.id)} data-cursor="play" className="group flex flex-col items-center gap-3 text-center">
+            <button
+              type="button"
+              onClick={p.id === 'recruiter' ? onFlow : p.id === 'engineer' ? onThreeD : p.id === 'projects' ? onModified : () => onPick(p.id)}
+              data-cursor="play"
+              className="group flex flex-col items-center gap-3 text-center"
+            >
               <span className="relative rounded-xl ring-2 ring-transparent transition duration-300 group-hover:scale-105 group-hover:ring-bone group-focus-visible:ring-bone">
                 <ProfileAvatar id={p.id} />
                 {p.id === 'portfolio' && (
                   <span className="absolute -right-2 -top-2 rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold tracking-[0.18em] text-ink">START</span>
                 )}
               </span>
-              <span className="font-sans text-sm font-medium text-mist transition group-hover:text-bone sm:text-base">{p.name}</span>
-              <span className="max-w-[9rem] text-[11px] leading-snug text-smoke">{p.blurb}</span>
+              <span className="font-sans text-sm font-medium text-mist transition group-hover:text-bone sm:text-base">
+                {p.id === 'recruiter' ? 'Flow Mode' : p.id === 'engineer' ? '3D Mode' : p.id === 'projects' ? 'Modified Mode' : p.name}
+              </span>
+              <span className="max-w-[9rem] text-[11px] leading-snug text-smoke">
+                {p.id === 'recruiter'
+                  ? 'A fluid, visual tour of the work'
+                  : p.id === 'engineer'
+                    ? 'Spatial systems, projects, and craft'
+                    : p.id === 'projects'
+                      ? 'A warm, playful look at the work'
+                      : p.blurb}
+              </span>
             </button>
           </motion.li>
         ))}

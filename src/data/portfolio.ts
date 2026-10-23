@@ -110,6 +110,45 @@ const violet: Palette = { from: '#160a24', via: '#543382', to: '#09070c', accent
 
 export const projects: Project[] = [
   {
+    id: 'finandrome',
+    title: 'Finandrome AI',
+    year: '2026',
+    genre: 'LENDING OPERATIONS · EVIDENCE-BACKED AI',
+    status: 'Platform foundation',
+    logline:
+      'An integrated lending-operations and intelligence platform connecting customer intake, evidence, credit assessment, servicing visibility, reconciled analytics, and authorized AI assistance.',
+    stack: ['Angular', 'Java', 'Fineract', 'AI workflows', 'Analytics', 'Document processing'],
+    build: [
+      'Defined a traceable application journey from customer intake and document collection through credit review, human decisioning, core-banking integration, and repayment visibility.',
+      'Designed four analytics perspectives with reconciled definitions, drill-downs, scoped exports, and explicit freshness and data-source boundaries.',
+      'Specified five evidence-backed AI capabilities that connect answers to authorized documents, application versions, and metric results.',
+      'The current foundation uses synthetic browser-local workflows; production backend connectivity, durable storage, live AI, and operational benchmarks remain integration work.',
+    ],
+    features: [
+      'Versioned applications, submissions, resubmissions, and evidence review',
+      'Role-aware customer, officer, reviewer, manager, analyst, and administrator journeys',
+      'Fineract-linked loan creation, servicing visibility, reconciliation, and recovery controls',
+      'Private document processing with asynchronous extraction and evidence traceability',
+      'Auditable human decisions with bounded AI assistance and reproducible evaluations',
+    ],
+    metrics: [
+      { value: '04', label: 'analytics perspectives defined in the target product scope' },
+      { value: '05', label: 'evidence-backed AI capabilities specified for rollout' },
+      { value: '06', label: 'primary roles with server-enforced permission boundaries' },
+    ],
+    architecture: [
+      { label: 'Intake · evidence', detail: 'Customer applications, documents, versions, and review state' },
+      { label: 'Credit workflow', detail: 'Deterministic assessment, human review, approval, and audit history' },
+      { label: 'Fineract adapter', detail: 'Sandbox loan lifecycle integration without replacing core accounting' },
+      { label: 'Analytics layer', detail: 'Reconciled metrics, drill-downs, freshness, and scoped exports' },
+      { label: 'AI assistance', detail: 'Authorized, evidence-linked answers and operational workflows' },
+    ],
+    github: 'https://github.com/KartikaySr/Finandrome_AI',
+    liveDemo: 'https://finandrome.kartikaysrivastava.in',
+    palette: amber,
+    motif: 'tenants',
+  },
+  {
     id: 'gridforge',
     title: 'GridForge-AI',
     year: '2026',
