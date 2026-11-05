@@ -108,7 +108,7 @@ const blue: Palette = { from: '#08122a', via: '#1e4b91', to: '#070910', accent: 
 const amber: Palette = { from: '#201305', via: '#75500b', to: '#0b0907', accent: '#ffc45d' };
 const violet: Palette = { from: '#160a24', via: '#543382', to: '#09070c', accent: '#c49cff' };
 
-export const projects: Project[] = [
+const projectCatalog: Project[] = [
   {
     id: 'finandrome',
     title: 'Finandrome AI',
@@ -290,6 +290,7 @@ export const projects: Project[] = [
       { label: 'Local · cloud bridges', detail: 'Execution and persistence options' },
     ],
     github: 'https://github.com/KartikaySr/MindineersOS',
+    liveDemo: 'https://mindineers.com',
     palette: violet,
     motif: 'tenants',
   },
@@ -327,6 +328,10 @@ export const projects: Project[] = [
     motif: 'flow',
   },
 ];
+
+export const projects: Project[] = ['mindineers', 'finandrome', 'aetherq', 'nexus', 'codeambers', 'gridforge']
+  .map((id) => projectCatalog.find((project) => project.id === id))
+  .filter((project): project is Project => Boolean(project));
 
 export type Achievement = {
   id: string;

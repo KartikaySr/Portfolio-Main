@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import type { CSSProperties } from 'react';
 import { education, experience, profile, projects, skillCategories } from '../data/portfolio';
+import ProjectDetailContent from './ProjectDetailContent';
 import './flow-mode.css';
 
 type FlowModeProps = {
@@ -155,14 +156,7 @@ export default function FlowMode({ onBack }: FlowModeProps) {
                     <p className="flow-kicker">{selectedProject.status} · {selectedProject.genre}</p>
                     <h3>{selectedProject.title}</h3>
                   </div>
-                  <p>{selectedProject.logline}</p>
-                  <div className="flow-tags">
-                    {selectedProject.stack.slice(0, 5).map((item) => <span key={item}>{item}</span>)}
-                  </div>
-                  <div className="flow-project-links">
-                    {selectedProject.github && <a href={selectedProject.github} target="_blank" rel="noreferrer">View source ↗</a>}
-                    {selectedProject.liveDemo && <a href={selectedProject.liveDemo} target="_blank" rel="noreferrer">Live experience ↗</a>}
-                  </div>
+                  <ProjectDetailContent project={selectedProject} />
                 </div>
               </motion.article>
             )}

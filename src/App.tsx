@@ -21,7 +21,6 @@ import AssistantHub from './components/AssistantHub';
 import CommandPalette from './components/CommandPalette';
 import { EASE } from './components/fx';
 import FlowMode from './components/FlowMode';
-import ThreeDMode from './components/ThreeDMode';
 import ModifiedMode from './components/ModifiedMode';
 
 // Overlays are only needed on demand — split them out of the first load.
@@ -32,6 +31,12 @@ const ResumeModal = lazy(() => import('./components/ResumeModal'));
 type Stage = 'opening' | 'profiles' | 'home';
 
 const STORAGE_KEY = 'kartikay-engineering-profile';
+
+declare global {
+  interface Window {
+    __swarmRebuild?: { stop: (reveal: boolean) => void };
+  }
+}
 
 function readStoredProfile(): ProfileId | null {
   try {
@@ -50,11 +55,12 @@ export default function App() {
       window.location.reload();
     }} />;
   }
-  if (mode === '3d') {
-    return <ThreeDMode onBack={() => {
-      window.history.replaceState({}, '', window.location.pathname);
-      window.location.reload();
-    }} />;
+  if (mode === 'swarm') {
+    return (
+      <SmoothScrollProvider>
+        <Series swarmMode />
+      </SmoothScrollProvider>
+    );
   }
   if (mode === 'modified') {
     return <ModifiedMode onBack={() => {
@@ -70,15 +76,25 @@ export default function App() {
   );
 }
 
-function Series() {
+function Series({ swarmMode = false }: { swarmMode?: boolean }) {
   const stored = readStoredProfile();
-  const [stage, setStage] = useState<Stage>(stored ? 'home' : 'opening');
+  const [stage, setStage] = useState<Stage>(swarmMode || stored ? 'home' : 'opening');
   const [profileId, setProfileId] = useState<ProfileId>(stored ?? 'portfolio');
   const [playing, setPlaying] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const { scrollTo, lock, unlock } = useSmoothScroll();
+
+  useEffect(() => {
+    if (!swarmMode) return;
+    if (document.querySelector('script[data-swarm-rebuild]')) return;
+    const script = document.createElement('script');
+    script.src = '/swarm-rebuild.js';
+    script.async = false;
+    script.dataset.swarmRebuild = 'true';
+    document.body.appendChild(script);
+  }, [swarmMode]);
 
   const order = viewerProfiles.find((p) => p.id === profileId)!.order;
 
@@ -142,8 +158,8 @@ function Series() {
             onFlow={() => {
               window.location.assign(`${window.location.pathname}?mode=flow`);
             }}
-            onThreeD={() => {
-              window.location.assign(`${window.location.pathname}?mode=3d`);
+            onSwarm={() => {
+              window.location.assign(`${window.location.pathname}?mode=swarm`);
             }}
             onModified={() => {
               window.location.assign(`${window.location.pathname}?mode=modified`);

@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { achievements, education, experience, profile, projects, skillCategories } from '../data/portfolio';
+import ProjectDetailContent from './ProjectDetailContent';
 import './modified-mode.css';
 
 type ModifiedModeProps = { onBack: () => void };
@@ -115,7 +116,11 @@ export default function ModifiedMode({ onBack }: ModifiedModeProps) {
             {active && <article className="modified-project-card" style={{ '--project-color': active.palette.accent } as CSSProperties}>
               <div className="modified-project-top"><span>{active.year}</span><b>{active.motif}</b></div>
               <div className="modified-project-symbol">{active.title.slice(0, 1)}</div>
-              <div className="modified-project-bottom"><span>{active.genre}</span><h3>{active.title}</h3><p>{active.logline}</p><div>{active.stack.slice(0, 4).map((tech) => <small key={tech}>{tech}</small>)}</div><aside>{active.github && <a href={active.github} target="_blank" rel="noreferrer">GitHub ↗</a>}{active.liveDemo && <a href={active.liveDemo} target="_blank" rel="noreferrer">Live ↗</a>}</aside></div>
+              <div className="modified-project-bottom">
+                <span>{active.genre}</span>
+                <h3>{active.title}</h3>
+                <ProjectDetailContent project={active} />
+              </div>
             </article>}
           </div>
         </section>
